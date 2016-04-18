@@ -142,9 +142,26 @@ def scheduleConfig():
             #d = json.dumps(d)
             #return jsonify(result = d)
             return flask.redirect(url_for('admin'))
+        slider1 = request.args.get('scheduleStart',0,type=str)
+        app.logger.debug(slider1)
+        slider1 = arrow.get(slider1,'H:mm A')
+        sliderS = slider1.format('H:mm')
+        app.logger.debug(sliderS)
+        slider2 = request.args.get('scheduleEnd',0,type=str)
+        slider2 = arrow.get(slider2,'H:mm A')
+        sliderF = slider2.format('H:mm')
+        timeBlock = 5
+        tTable = {}
+        clientList = []
+        while(sliderS!=sliderF):
+            tTable.update({sliderS:clientList})
+            slider1 = slider1.replace(minutes=+timeBlock)
+            sliderS = slider1.format('H:mm')
+        tTable.update({sliderS:clientList})
         for i in range(1,numSchedules+1):
             #record = { "name": i, "date":  arrow.utcnow().naive, "ID": "29838472983" ,"type": "Schedule"}
-            record = { "name": i, "date":  arrow.utcnow().naive, "ID": "29838472983" ,"type": "Schedule", "times": ["6:00", "6:05", "6:10", "6:15", "6:20", "6:25", "6:30", "6:35", "6:40", "6:45", "6:50", "6:55", "7:00", "7:05", "7:10", "7:15", "7:20", "7:25", "7:30", "7:35", "7:40", "7:45", "7:50", "7:55", "8:00", "8:05", "8:10", "8:15", "8:20", "8:05", "8:05", "8:05", "8:05", "8:05", "8:05", "8:05", "8:05", "8:05" ]}
+            record = { "name": i, "date":  arrow.utcnow().naive, "ID": "29838472983" ,"type": "Schedule", "tTable": tTable}
+            app.logger.debug(tTable)
             collectionSchedules.insert(record)
         #d = {'result':'success! added schedule'+tempCount}
         #d = json.dumps(d)

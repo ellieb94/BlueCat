@@ -16,10 +16,18 @@
 <h1>Admin Page</h1>
 <p>This is just a placeholder page</p>
 <div class="container">
+{% if session.schedules %}
+<form id="removeAllSchedules" action="/_ScheduleConfig" method="get">
+    <input type="hidden" name="ScheduleId" value="0">
+    <button name="ScheduleSetting" class="btn btn-primary" value="removeSchedule">Delete schedules</button>
+</form>
+{% else %}
 <form id="addSchedule" action="/_ScheduleConfig" method="get">
   <!--<button name="login" type="submit" value="client" class="btn btn-default">Client</button> -->
   Number of Schedules: <input type="text" name="name"><br>
   <div id="time-range">
+    <input type="hidden" id="scheduleStart" name="scheduleStart" value="8:00 PM">
+    <input type="hidden" id="scheduleEnd"name="scheduleEnd" value="9:00 PM">
     <p>Time: <span name="slider1" class="slider-time">8:00 PM</span> - <span name="slider2" class="slider-time2">9:00 PM</span></p>
     <div class="sliders_step1">
       <div id="slider-range">
@@ -28,10 +36,8 @@
   </div>
   <button name="ScheduleSetting" type="submit" value="addSchedule"onclick='renderSchedule' class="btn btn-primary">Add Schedules</button>
   </form>
-<form id="removeAllSchedules" action="/_ScheduleConfig" method="get">
-    <input type="hidden" name="ScheduleId" value="0">
-    <button name="ScheduleSetting" class="btn btn-primary" value="removeSchedule">Delete schedules</button>
-</form>
+  {% endif %}
+
 <!--  <h1>Schedules</h1>
 
 {% if session.schedules %}
@@ -95,10 +101,9 @@
       </tr>
     </thead>
     <tbody>
-    {% for t in sch.times %}
-
+    {%for key in sch.tTable %}
       <tr>
-        <td>{{ t }}</td>
+        <td>{{ key }}</td>
         <td>  </td>
       </tr>
     {% endfor %}
@@ -169,6 +174,7 @@ $("#slider-range").slider({
       minutes1 = minutes1;
     }
     $('.slider-time').html(hours1 + ':' + minutes1);
+    $("#scheduleStart").val(hours1 + ':' + minutes1);
     var hours2 = Math.floor(ui.values[1]/60);
     var minutes2 = ui.values[1] - (hours2*60);
     if (hours2.length == 1) {
@@ -196,6 +202,7 @@ $("#slider-range").slider({
       minutes2 = minutes2 + " PM";
     }
     $('.slider-time2').html(hours2 + ':' + minutes2);
+    $("#scheduleEnd").val(hours2 + ':' + minutes2);
   }
 });
 </script>
