@@ -52,11 +52,12 @@
 {% else %}
 <p>No schedules for you. </p>
 {% endif %}-->
+
 <div class="col-md-3">
   <h1>Clients</h1>
 {% if session.clients %}
 {% for memo in session.clients %}
-<div class="memo">
+<div class="client-div">
 <!--<div class="row">
 <div class="col-md-2">-->
 <div class="col-md-8">
@@ -116,11 +117,21 @@
     </div>
 </div> <!--end Row-->
 
-  <script type="text/javascript">
+<script type="text/javascript">
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     function myFunction(val){
         document.getElementById(val).submit();
     };
+</script>
+<script type="text/javascript">
+var targetContainer = document.getElementById("client-div");
+var eventSource = new EventSource("/stream");
+
+eventSource.onmessage = function(e) {
+  alert(e.data);
+  targetContainer.innerHTML = targetContainer.innerHTML;
+};
+
 </script>
 <script type="text/javascript">
 $("#slider-range").slider({

@@ -164,6 +164,17 @@ def scheduleConfig():
         app.logger.debug("wat")
     return flask.redirect(url_for('admin'))
 
+@app.route("/stream")
+def stream():
+    def eventStream():
+        import time
+        while True:
+        #pull data from database, see if new client submission
+            if collectionClients.find({}).count() > 0:
+                yield "data: %i %s\n\n" % (collectionClients.find({}).count(), " new rides requested")
+                time.sleep(30)
+    return flask.Response(eventStream(), mimetype="text/event-stream")        
+
 
 ##############################
 
