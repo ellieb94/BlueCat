@@ -105,13 +105,19 @@ def portalSelector():
 def clientConfig():
     #collectionTemp = collectionClients
     app.logger.debug("Got a JSON request")
-    funct = request.args.get('ClientSetting',0,type=str)
+    funct = request.args.get('clientSetting',0,type=str)
+    app.logger.debug(funct)
     if funct == "addClient":
         objId1 = request.args.get('fname',0,type=str)
-        objId2 = request.args.get('lname',0,type=str)
+        objId2 = request.args.get('studentid',0,type=str)
+        objId3 = request.args.get('phonenum',0,type=str)
+        objId4 = request.args.get('riders',0,type=str)
+        objId5 = request.args.get('pickup',0,type=str)
+        objId6 = request.args.get('dropoff',0,type=str)
         ####################### if verifyinformation(val) #################
-        name = objId1+" "+objId2
-        record = { "name": name, "date":  arrow.utcnow().naive, "ID": "29838472983" ,"type": "Client", "status": "pending"}
+        record = { "name": objId1, "date":  arrow.utcnow().naive, 
+        "ID": objId2 , "phoneNum": objId3, "riders": objId4, 
+        "pickup": objId5, "dropoff":objId6, "type": "Client", "status": "pending"}
         collectionClients.insert(record)
         d = {'result':'added'}
     elif funct == "removeClient":

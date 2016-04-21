@@ -1,0 +1,13 @@
+h1, h2, h3, h4, h5, h6 {
+	text-align: center;
+}
+
+h5 {
+	padding-bottom: 20px;
+}
+
+#myBtn {
+	float: right;
+	margin-right: 23px;
+	margin-top: 8px;
+}
