@@ -36,6 +36,107 @@
       <label class="radio-inline"><input type="radio" name="optradio" value="2">2 Riders</label>
       <label class="radio-inline"><input type="radio" name="optradio" value="3">3 Riders</label>
     </div>  <br>
+    <div class="form-group" id="time">
+      <label for="time">Pickup time:</label>
+      <select class="form-control" id="time" name="time">
+        <option>06:00</option>
+        <option>06:05</option>
+        <option>06:10</option>
+        <option>06:15</option>
+        <option>06:20</option>
+        <option>06:25</option>
+        <option>06:30</option>
+        <option>06:35</option>
+        <option>06:40</option>
+        <option>06:45</option>
+        <option>06:50</option>
+        <option>06:55</option>
+        <option>07:00</option>
+        <option>07:05</option>
+        <option>07:10</option>
+        <option>07:15</option>
+        <option>07:20</option>
+        <option>07:25</option>
+        <option>07:30</option>
+        <option>07:35</option>
+        <option>07:40</option>
+        <option>07:45</option>
+        <option>07:50</option>
+        <option>07:55</option>
+        <option>08:00</option>
+        <option>08:05</option>
+        <option>08:10</option>
+        <option>08:15</option>
+        <option>08:20</option>
+        <option>08:25</option>
+        <option>08:30</option>
+        <option>08:35</option>
+        <option>08:40</option>
+        <option>08:45</option>
+        <option>08:50</option>
+        <option>08:55</option>
+        <option>09:00</option>
+        <option>09:05</option>
+        <option>09:10</option>
+        <option>09:15</option>
+        <option>09:20</option>
+        <option>09:25</option>
+        <option>09:30</option>
+        <option>09:35</option>
+        <option>09:40</option>
+        <option>09:45</option>
+        <option>09:50</option>
+        <option>09:55</option>
+        <option>10:00</option>
+        <option>10:05</option>
+        <option>10:10</option>
+        <option>10:15</option>
+        <option>10:20</option>
+        <option>10:25</option>
+        <option>10:30</option>
+        <option>10:35</option>
+        <option>10:40</option>
+        <option>10:45</option>
+        <option>10:50</option>
+        <option>10:55</option>
+        <option>11:00</option>
+        <option>11:05</option>
+        <option>11:10</option>
+        <option>11:15</option>
+        <option>11:20</option>
+        <option>11:25</option>
+        <option>11:30</option>
+        <option>11:35</option>
+        <option>11:40</option>
+        <option>11:45</option>
+        <option>11:50</option>
+        <option>11:55</option>
+        <option>00:00</option>
+        <option>00:05</option>
+        <option>00:10</option>
+        <option>00:15</option>
+        <option>00:20</option>
+        <option>00:25</option>
+        <option>00:30</option>
+        <option>00:35</option>
+        <option>00:40</option>
+        <option>00:45</option>
+        <option>00:50</option>
+        <option>00:55</option>
+        <option>01:00</option>
+        <option>01:05</option>
+        <option>01:10</option>
+        <option>01:15</option>
+        <option>01:20</option>
+        <option>01:25</option>
+        <option>01:30</option>
+        <option>01:35</option>
+        <option>01:40</option>
+        <option>01:45</option>
+        <option>01:50</option>
+        <option>01:55</option>
+      </select>
+    </div>
     <div class="form-group">
       <label for="pickup">Pickup location:</label>
       <input type="text" id="pickup" name="pickup" class="form-control">
@@ -80,6 +181,7 @@
           var studentid = document.getElementById("studentid").value;
           var phonenum = document.getElementById("phonenum").value;
           var riders = $('#radio input:radio:checked').val();
+          var time = $(#time).find("option:selected").text();
           var pickup = document.getElementById("pickup").value;
           var dropoff = document.getElementById("dropoff").value;
 
@@ -118,7 +220,7 @@
           } else {
           $.getJSON($SCRIPT_ROOT + '/_submitClientInfo',
                   { fname: fname, studentid: studentid, phonenum: phonenum, 
-                    riders: riders, pickup: pickup, dropoff: dropoff, clientSetting: document.getElementById("myBtn").value},
+                    riders: riders, time: time, pickup: pickup, dropoff: dropoff, clientSetting: document.getElementById("myBtn").value},
                   function(data) {
                      var result = data.result;
                      obj = JSON.parse(result);

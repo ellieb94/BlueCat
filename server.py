@@ -112,12 +112,13 @@ def clientConfig():
         objId2 = request.args.get('studentid',0,type=str)
         objId3 = request.args.get('phonenum',0,type=str)
         objId4 = request.args.get('riders',0,type=str)
-        objId5 = request.args.get('pickup',0,type=str)
-        objId6 = request.args.get('dropoff',0,type=str)
+        objId5 = request.args.get('time',0,type=str)
+        objId6 = request.args.get('pickup',0,type=str)
+        objId7 = request.args.get('dropoff',0,type=str)
         ####################### if verifyinformation(val) #################
         record = { "name": objId1, "date":  arrow.utcnow().naive, 
         "ID": objId2 , "phoneNum": objId3, "riders": objId4, 
-        "pickup": objId5, "dropoff":objId6, "type": "Client", "status": "pending"}
+        "time": objId5, "pickup": objId6, "dropoff":objId7, "type": "Client", "status": "pending"}
         collectionClients.insert(record)
         d = {'result':'added'}
     elif funct == "removeClient":
